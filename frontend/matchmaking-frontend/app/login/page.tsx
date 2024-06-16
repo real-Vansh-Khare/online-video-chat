@@ -9,7 +9,7 @@ export default function login() {
                 <input type="text" name="lusername" id="lusername" placeholder="Enter username" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
                 <label htmlFor="lpassword" className="mt-4">Password</label>
                 <input type="password" name="lpassword" id="lpassword" placeholder="Enter password" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
-                <Link href="/" className="mt-8 p-4 bg-purple-800 text-white rounded-full font-bold ">
+                <Link href="/connect" className="mt-8 p-4 bg-purple-800 text-white rounded-full font-bold ">
                     <button className="w-full">Log in</button>
                 </Link>
             </form>

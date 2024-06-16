@@ -11,7 +11,7 @@ export default function signup() {
                 <input type="text" name="susername" id="susername" placeholder="Enter username" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
                 <label htmlFor="spassword" className="mt-4">Password</label>
                 <input type="password" name="spassword" id="spassword" placeholder="Enter password" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
-                <Link href="/" className="mt-8 p-4 bg-purple-800 text-white rounded-full font-bold ">
+                <Link href="/login" className="mt-8 p-4 bg-purple-800 text-white rounded-full font-bold ">
                     <button className="w-full">Submit</button>
                 </Link>
             </form>

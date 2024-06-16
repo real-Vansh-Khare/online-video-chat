@@ -5,7 +5,7 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 import Link from "next/link";
 
-function ThreeDCardDemo() {
+function WelcomeCard() {
   return (
     <CardContainer className="inter-var shadow-xl shadow-purple-800">
       <CardBody className="bg-purple-200 relative group/card w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
@@ -30,16 +30,16 @@ function ThreeDCardDemo() {
           <CardItem
             translateZ={20}
             as={Link}
-            href="/"
-            target="__blank"
-            className="px-4 py-2 rounded-xl text-xs font-normal"
+            href="/signup"
+            className="px-4 py-2 rounded-xl text-md font-normal"
           >
             Sign up →
           </CardItem>
           <CardItem
             translateZ={20}
-            as="button"
-            className="px-4 py-2 rounded-xl bg-purple-900 text-white  text-xs font-bold"
+            as={Link}
+            href="/connect"
+            className="px-4 py-2 rounded-xl bg-purple-900 text-white  text-md font-bold"
           >
             Connect
           </CardItem>
@@ -53,7 +53,7 @@ function ThreeDCardDemo() {
 export default function Home() {
   return (
     <main>
-      <ThreeDCardDemo />
+      <WelcomeCard />
     </main>
   )
 }
