@@ -13,6 +13,7 @@ export const authenticate_jwt = (
 ) => {
   const auth_header = req.headers["authorization"];
   const token = auth_header && auth_header.split(" ")[1];
+  console.log("token is", token);
   if (!token) {
     res.status(401).json(new ErrorResponse("unauthorized"));
     return;
@@ -21,9 +22,7 @@ export const authenticate_jwt = (
       const payload = verify_jwt(token) as JwtPayload;
       console.log("username acc to token=", payload.username);
       console.log("request param=", req.params.username);
-      if (payload.username.toString() !== req.params.username) {
-        throw new UnauthorizedError();
-      }
+      
       (req as AuthorizedRequest).user = {
         username: payload.username.toString(),
       };
