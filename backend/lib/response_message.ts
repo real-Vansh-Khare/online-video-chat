@@ -21,3 +21,10 @@ export class SuccessResponse {
     }
   }
   
+export class RedirectResponse extends SuccessResponse {
+  url: string;
+  constructor(message: string, url: string) {
+    super(message);
+    this.url = url;
+  }
+}
