@@ -5,6 +5,7 @@ import { AuthorizedRequest } from "../interfaces/authorized_request";
 import { UnauthorizedError } from "../lib/error";
 import { ErrorResponse, RedirectResponse } from "../lib/response_message";
 import { verify_jwt } from "../util/jwt";
+import jwt from "jsonwebtoken";
 
 export const authenticate_jwt = (
   req: Request,
@@ -19,6 +20,12 @@ export const authenticate_jwt = (
     return;
   } else {
     try {
+
+      if(process.env.NODE_ENV === "DEVELOPMENT") {
+        const decoded_token = jwt.decode(token);
+        console.log("decoded token is", decoded_token);
+      }
+
       const payload = verify_jwt(token) as JwtPayload;
       console.log("username acc to token=", payload.username);
       console.log("request param=", req.params.username);
