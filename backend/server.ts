@@ -6,6 +6,7 @@ import helmet from "helmet";
 import user_router from './routes/user.router';
 import cookie_parser from 'cookie-parser';
 import { authenticate_jwt } from './middlewares/auth.middleware';
+import xlog from './util/logger';
 
 dotenv.config()
 
@@ -33,5 +34,5 @@ app.get('/protected', authenticate_jwt, (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  xlog(`Server is running at http://localhost:${port}`);
 });

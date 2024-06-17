@@ -6,6 +6,7 @@ import { UnauthorizedError } from "../lib/error";
 import { ErrorResponse, RedirectResponse } from "../lib/response_message";
 import { verify_jwt } from "../util/jwt";
 import jwt from "jsonwebtoken";
+import xlog from "../util/logger";
 
 export const authenticate_jwt = (
   req: Request,
@@ -14,7 +15,7 @@ export const authenticate_jwt = (
 ) => {
   const auth_header = req.headers["authorization"];
   const token = auth_header && auth_header.split(" ")[1];
-  console.log("token is", token);
+  xlog(token, "JWT TOKEN IN AUTH MIDDLEWARE");
   if (!token) {
     res.status(401).json(new ErrorResponse("unauthorized"));
     return;
@@ -22,20 +23,24 @@ export const authenticate_jwt = (
     try {
 
       if(process.env.NODE_ENV === "DEVELOPMENT") {
-        const decoded_token = jwt.decode(token);
-        console.log("decoded token is", decoded_token);
+        const decoded_token = jwt.decode(token) as JwtPayload;
+        xlog(decoded_token, "DECODED TOKEN");
+
+        (req as AuthorizedRequest).user = {
+          username: decoded_token.username.toString(),
+        };
+        next();
       }
 
       const payload = verify_jwt(token) as JwtPayload;
-      console.log("username acc to token=", payload.username);
-      console.log("request param=", req.params.username);
+      xlog("username acc to token=", payload.username);
       
       (req as AuthorizedRequest).user = {
         username: payload.username.toString(),
       };
       next();
     } catch (err) {
-      console.log(err);
+      xlog(err);
       switch ((err as Error).constructor) {
       case JsonWebTokenError:
         res

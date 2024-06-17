@@ -4,6 +4,7 @@ import { Server as SocketIOServer } from "socket.io";
 
 import SocketEvents from "../enums/socket_enum";
 import { socket_auth_middleware } from "./middlewares/auth.middleware";
+import xlog from "../util/logger";
 
 /**
  * Socket io configuration
@@ -32,6 +33,6 @@ export const init_socket_connection = (path: string, server: Server) => {
 
   // Listen for events by the clients.
   io.on(SocketEvents.CONNECTION, (socket) => {
-    console.log("user connected");
+    xlog("user connected");
   });
 };
