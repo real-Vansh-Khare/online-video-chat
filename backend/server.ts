@@ -2,13 +2,16 @@ import express, { Request, Response } from 'express';
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
+import helmet from "helmet";
 import user_router from './routes/user.router';
+
 
 dotenv.config()
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(helmet)
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(
