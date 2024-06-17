@@ -5,6 +5,7 @@ import cors from "cors";
 import helmet from "helmet";
 import user_router from './routes/user.router';
 import cookie_parser from 'cookie-parser';
+import { authenticate_jwt } from './middlewares/auth.middleware';
 
 dotenv.config()
 
@@ -25,6 +26,10 @@ app.use('/user', user_router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
+});
+
+app.get('/protected', authenticate_jwt, (req: Request, res: Response) => {
+  res.send("Protected route accessed");
 });
 
 app.listen(port, () => {
