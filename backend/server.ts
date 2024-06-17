@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cookie_parser())
-app.use(helmet)
+app.use(helmet())
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(
