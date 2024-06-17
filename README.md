@@ -1,4 +1,6 @@
-# ONLINE VIDEO MATCHMAKING
+# stu-mingle
+
+Students get to mingle with each other ! 
 
 ## BACKEND
 
@@ -12,6 +14,10 @@
 - Install the dependencies
     ```bash
     npm i
+    ```
+- Run postgres server either locally or through docker via our script.
+    ```bash
+        ./tools/run_postgres_docker.sh
     ```
 - Apply prisma migration
     ```bash
