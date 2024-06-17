@@ -4,13 +4,14 @@ import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 import user_router from './routes/user.router';
-
+import cookie_parser from 'cookie-parser';
 
 dotenv.config()
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cookie_parser())
 app.use(helmet)
 app.use(express.json());
 app.use(morgan("tiny"));
