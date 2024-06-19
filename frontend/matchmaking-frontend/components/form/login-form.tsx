@@ -27,12 +27,53 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form className="flex flex-col w- p-8 text-gray-700 text-xl" onSubmit={(e) => handleLoginFormSubmit(e)} ref={formRef}>
-        <label htmlFor="lusername" className="mt-4">Username</label>
-        <input type="text" name="lusername" id="lusername" placeholder="Enter username" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
-        <label htmlFor="lpassword" className="mt-4">Password</label>
-        <input type="password" name="lpassword" id="lpassword" placeholder="Enter password" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
-        <button className="mt-8 px-4 py-2 bg-purple-800 text-white rounded-full font-bold" type='submit'>Log in</button>
+    <form className="space-y-6" onSubmit={(e) => handleLoginFormSubmit(e)} ref={formRef}>
+          <div>
+              <label htmlFor="lusername" className="block text-sm font-medium leading-6 text-gray-900">
+                Username
+              </label>
+              <div className="mt-2">
+                <input
+                  id="lusername"
+                  name="lusername"
+                  type="text"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="lpassword" className="block text-sm font-medium leading-6 text-gray-900">
+                  Password
+                </label>
+                <div className="text-sm">
+                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Forgot password?
+                  </a>
+                </div>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="lpassword"
+                  name="lpassword"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign in
+              </button>
+            </div>
     </form>
   )
 }
