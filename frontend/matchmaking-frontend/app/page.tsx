@@ -8,7 +8,7 @@ import Link from "next/link";
 function WelcomeCard() {
   return (
     <CardContainer className="inter-var shadow-xl shadow-purple-800">
-      <CardBody className="bg-purple-200 relative group/card w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+      <CardBody className="bg-white relative group/card w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
         <CardItem
           translateZ="50"
           className="text-4xl font-bold text-purple-900 text-center"
