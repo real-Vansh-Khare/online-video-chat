@@ -32,6 +32,8 @@ const login_user = async (req: UserLoginRequest, res: Response) => {
     
     if( result == LoginEnum.VERIFIED) {
         const access_token = generate_jwt(username)
+
+        // TODO : Send the access token as JSON.
         // Set token cookie to be kept in the browser
         res.cookie("token", access_token, {
         // ! important secure headers to be put in production
@@ -39,7 +41,7 @@ const login_user = async (req: UserLoginRequest, res: Response) => {
         // secure: true,
             maxAge: 4 * 60 * 60,
         });
-        res.status(HttpStatusCodes.OK).json(new SuccessResponse("User Logged in"));
+        res.status(HttpStatusCodes.OK).json(new SuccessResponse("User Logged in", { login_success: true, token: access_token }));
     } else {
         res
             .status(HttpStatusCodes.FORBIDDEN)
