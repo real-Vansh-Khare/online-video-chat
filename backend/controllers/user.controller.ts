@@ -6,9 +6,12 @@ import { ErrorResponse, SuccessResponse } from "../lib/response_message";
 import { LoginEnum } from "../enums/login";
 import db from "../lib/db";
 import { generate_jwt } from "../util/jwt";
+import xlog from "../util/logger";
 
 const signup_user = async (req: UserSignupRequest, res: Response) => {
     const user_signup_data = req.body;
+
+    xlog(user_signup_data, "user data is ");
 
     const encrypted_password = await bcrypt.hash(
         user_signup_data.password,
@@ -19,8 +22,9 @@ const signup_user = async (req: UserSignupRequest, res: Response) => {
 
     try {
         await db.user__create_user(user_signup_data);
-        res.status(HttpStatusCodes.OK).json(new SuccessResponse("User created"))
+        res.status(HttpStatusCodes.OK).json(new SuccessResponse("User created successfully", { signup_success: true, error: null }));
     } catch(err) {
+      xlog(err, "Error creating user");
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
             .json((new ErrorResponse((err as Error).message, "Error while saving user")))
     }
@@ -32,6 +36,8 @@ const login_user = async (req: UserLoginRequest, res: Response) => {
     
     if( result == LoginEnum.VERIFIED) {
         const access_token = generate_jwt(username)
+
+        // TODO : Send the access token as JSON.
         // Set token cookie to be kept in the browser
         res.cookie("token", access_token, {
         // ! important secure headers to be put in production
@@ -39,7 +45,7 @@ const login_user = async (req: UserLoginRequest, res: Response) => {
         // secure: true,
             maxAge: 4 * 60 * 60,
         });
-        res.status(HttpStatusCodes.OK).json(new SuccessResponse("User Logged in"));
+        res.status(HttpStatusCodes.OK).json(new SuccessResponse("User Logged in", { login_success: true, token: access_token }));
     } else {
         res
             .status(HttpStatusCodes.FORBIDDEN)
