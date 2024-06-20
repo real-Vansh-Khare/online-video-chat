@@ -1,10 +1,33 @@
 import SignupForm from "@/components/form/signup-form";
+import Link from "next/link";
+import { FaBolt } from "react-icons/fa6";
+
 
 export default function signup() {
+
     return (
-        <div className="w-[40%] min-w-72 mx-auto mt-24 bg-gray-200 rounded-xl border-2 border-slate-400">
-            <div className="text-3xl font-bold text-center p-4 bg-purple-800 text-white rounded-md rounded-b-none tracking-widest">Signup</div>
-            <SignupForm/>
+        <>
+        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <div className="text-4xl text-purple-500 flex items-center justify-center">
+                <FaBolt  />
+            </div>
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign up to create your account
+          </h2>
         </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <SignupForm/>
+
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Already have an account?{' '}
+            <Link href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Head to login page
+            </Link>
+          </p>
+        </div>
+      </div>
+    </>
     )
 }

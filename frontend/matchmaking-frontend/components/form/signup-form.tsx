@@ -29,14 +29,61 @@ const SignupForm = () => {
   };
 
   return (
-    <form className="flex flex-col w- p-8 text-gray-700 text-xl" onSubmit={(e) => handleSignupFormSubmit(e)}>
-        <label htmlFor="semail" className="mt-4">Email address</label>
-        <input type="email" name="semail" id="semail" placeholder="Enter email" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
-        <label htmlFor="susername" className="mt-4">Username</label>
-        <input type="text" name="susername" id="susername" placeholder="Enter username" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
-        <label htmlFor="spassword" className="mt-4">Password</label>
-        <input type="password" name="spassword" id="spassword" placeholder="Enter password" className="text-black mt-1 p-1 border-purple-700 focus:outline-none focus:border-b-2"></input>
-        <button className="mt-8 p-4 bg-purple-800 text-white rounded-full font-bold" type='submit'>Submit</button>
+    <form className="space-y-6" onSubmit={(e) => handleSignupFormSubmit(e)}>
+      <div>
+              <label htmlFor="semail" className="block text-sm font-medium leading-6 text-gray-900">
+                Email address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="semail"
+                  name="semail"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="susername" className="block text-sm font-medium leading-6 text-gray-900">
+                Username
+              </label>
+              <div className="mt-2">
+                <input
+                  id="susername"
+                  name="susername"
+                  type="text"
+                  required
+                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+                <label htmlFor="spassword" className="block text-sm font-medium leading-6 text-gray-900">
+                  Password
+                </label>
+              <div className="mt-2">
+                <input
+                  id="spassword"
+                  name="spassword"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign in
+              </button>
+            </div>
     </form>
   )
 }
