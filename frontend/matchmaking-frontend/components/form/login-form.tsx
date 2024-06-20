@@ -4,6 +4,7 @@ import xlog from '@/utils/logger';
 import axios from 'axios';
 import React, { useRef } from 'react'
 import { useRouter } from 'next/navigation';
+import API from '@/lib/api';
 
 const LoginForm: React.FC = () => {
 
@@ -19,9 +20,9 @@ const LoginForm: React.FC = () => {
     const data = {username, password};
 
     // now the post request etc.
-    const res = await axios.post("/api/login", data);
-    if(res.data.login_success) {
-      router.push(res.data.redirect_url);
+    const res = await axios.post(API.LOGIN, data);
+    if(res.data.data.login_success) {
+      router.push("/connect");
     }
   };
 

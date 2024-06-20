@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { FormEvent } from 'react'
 import { useRouter } from 'next/navigation';
 import xlog from '@/utils/logger';
+import API from '@/lib/api';
 
 const SignupForm = () => {
   const router = useRouter();
@@ -16,11 +17,11 @@ const SignupForm = () => {
     const data = { email, username, password };
     xlog(data, "data is");
     try {
-      const res = await axios.post("/api/signup", data);
-      if(res.data.signup_success) {
+      const res = await axios.post(API.SIGNUP, data);
+      if(res.data.data.signup_success) {
         // todo: display a toast signup success
         xlog(res); 
-        router.push(res.data.redirect_url);
+        router.push("/login");
       }
     } catch (err) {
       xlog(err);
