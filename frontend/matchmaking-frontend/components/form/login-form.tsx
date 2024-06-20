@@ -1,18 +1,28 @@
 "use client";
 
+import xlog from '@/utils/logger';
+import axios from 'axios';
 import React, { useRef } from 'react'
+import { useRouter } from 'next/navigation';
 
 const LoginForm: React.FC = () => {
 
   const formRef = useRef(null);
+  const router = useRouter();
 
   const handleLoginFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const name = formData.get('lusername');
-    const email = formData.get('lpassword');
+    const username = formData.get('lusername');
+    const password = formData.get('lpassword');
+
+    const data = {username, password};
 
     // now the post request etc.
+    const res = await axios.post("/api/login", data);
+    if(res.data.login_success) {
+      router.push(res.data.redirect_url);
+    }
   };
 
   return (
