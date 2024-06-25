@@ -1,8 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import { Socket } from "socket.io";
 import matchList from "../../lib/match_wait_list";
-
-const prisma = new PrismaClient();
+import xlog from "../../util/logger";
+import socket_id_map from "../../lib/data_structures/sid_cid_map";
 
 /**
  * Puts the client ID into the match waiting list. The matchmaking engine
@@ -16,8 +15,13 @@ export const match_request_handler = async (
   id: string,
   callback: (message: string) => void
 ) => {
+
+  xlog("Match request has arrived with id: " + id);
   // Create a private room between the server and client
   socket.join(id);
+
+  // map the socket ID to the client ID
+  socket_id_map.add(socket.id, id);
 
   // Add client to waiting list
   // then the matchmaking engine will find its match
