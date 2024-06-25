@@ -21,8 +21,7 @@ export const socket_auth_middleware = (
     verify_jwt(token);
     next();
   } catch (err) {
-    // On error rejects the connection and sends the error object to the
-    // client
+    // On error rejects the connection and sends the error object to the client.
     next(new Error(SocketEvents.UNAUTHORIZED));
   }
 };
