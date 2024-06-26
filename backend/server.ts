@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
@@ -7,6 +7,11 @@ import user_router from './routes/user.router';
 import cookie_parser from 'cookie-parser';
 import { authenticate_jwt } from './middlewares/auth.middleware';
 import xlog from './util/logger';
+import { init_socket_connection } from './sockets/socket';
+
+// Maybe later change to https
+import { createServer } from 'http';
+import matchList from './lib/match_wait_list';
 
 dotenv.config()
 
@@ -14,14 +19,21 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cookie_parser())
+
 app.use(helmet())
+app.disable("x-powered-by");
+
 app.use(express.json());
 app.use(morgan("tiny"));
+
 app.use(
   cors({
     origin: "*",
   })
 );
+
+// SERVER INSTANCE FOR SOCKET IO
+export const server = createServer(app);
 
 app.use('/user', user_router);
 
@@ -33,6 +45,16 @@ app.get('/protected', authenticate_jwt, (req: Request, res: Response) => {
   res.send("Protected route accessed");
 });
 
-app.listen(port, () => {
+init_socket_connection('/websockets/', server)
+
+app.use(( err: Error, req: Request, res: Response, next: NextFunction) => {
+  xlog("caught at global catch");
+  console.trace(err);
+
+});
+
+server.listen(port, () => {
   xlog(`Server is running at http://localhost:${port}`);
 });
+
+

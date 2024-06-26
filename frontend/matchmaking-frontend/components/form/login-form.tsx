@@ -22,6 +22,7 @@ const LoginForm: React.FC = () => {
     // now the post request etc.
     const res = await axios.post(API.LOGIN, data);
     if(res.data.data.login_success) {
+      localStorage.setItem('stu_mingle_access_token', res.data.data.token);
       router.push("/connect");
     }
   };
