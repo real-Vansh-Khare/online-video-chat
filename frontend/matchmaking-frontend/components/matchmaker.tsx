@@ -18,7 +18,7 @@ const MatchMaker = () => {
   const [userId, setUserId] = useState<string|null>(null);
   const [matchDetails, setMatchDetails] = useState<MatchDetails>({ matchId: null, matchFound: false, isCaller: false });
   const [socketInstance, setSocketInstance] = useState<Socket|undefined>(undefined);
-  
+
   const sendMatchRequest = React.useCallback(async () => {
     const userId = getRandomUserId();
     const socket = socketInit(userId, matchDetails, setMatchDetails);
@@ -34,10 +34,10 @@ const MatchMaker = () => {
 
   return (
     <>
-      <div>Matchmaker</div>
+      <div className='ml-4'>Matchmaker</div>
       <button 
       onClick={() => sendMatchRequest()}
-      className='px-2 py-1 rounded bg-blue-500 text-white m-4'>match</button>
+      className='px-2 py-1 rounded bg-blue-500 text-white ml-4'>Next Match</button>
       {matchDetails.matchFound && <VideoCaller userId={userId} matchDetails={matchDetails}/>}
       {matchDetails.matchFound && " match found with " + matchDetails.matchId}
     </>

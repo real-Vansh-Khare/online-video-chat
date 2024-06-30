@@ -48,7 +48,7 @@ export const init_socket_connection = (path: string, server: Server) => {
       let client_id = socket_id_map.get_c(socket.id);
 
       // Delete from matchList
-      client_id && matchList.delete_one(client_id);
+      // client_id && matchList.delete_one(client_id);
 
       // Delete from the map
       socket_id_map.remove(socket.id);
