@@ -27,7 +27,7 @@ const VideoCaller: React.FC<VideoCallerProps> = ({ userId, matchDetails }) => {
             })
             prevId.current = matchDetails.matchId
         }
-    }, 500)
+    }, 1500)
   }
   function reciever(peerI: Peer, stream: MediaStream) {
     peerI.on("call", (call: MediaConnection) => {
