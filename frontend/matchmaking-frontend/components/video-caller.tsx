@@ -92,9 +92,19 @@ const VideoCaller: React.FC<VideoCallerProps> = ({ userId, matchDetails }) => {
   }, [matchDetails, userId]);
 
   return (
-      <div className='flex flex-col lg:flex-row gap-6'>
-        <video ref={userVideo} autoPlay playsInline muted className='max-w-[500px] m-4'/>
-        <video ref={matchVideo} autoPlay playsInline muted className='max-w-[500px] m-4'/>
+      <div className='flex flex-col items-center justify-center relative m-4'>
+        <div className='px-1 border-slate-800 border-2 min-w-full max-w-[60rem] mx-auto rounded-xl'>
+            <video ref={matchVideo} autoPlay playsInline muted className='w-full m-4 z-20 mx-auto rounded-xl'/>
+        </div>
+        <div className='p-1 mx-auto max-w-40'
+            style={{
+                position: (matchDetails.matchFound ? 'absolute' : 'static'),
+                bottom: 2,
+                right: 3,
+            }}
+        >
+            <video ref={userVideo} autoPlay playsInline muted className='w-full m-4 z-20 mx-auto rounded-xl'/>
+        </div>
       </div>
   );
 };

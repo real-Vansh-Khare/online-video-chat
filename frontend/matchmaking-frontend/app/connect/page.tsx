@@ -5,7 +5,9 @@ import MatchMaker from "@/components/matchmaker"
 export default function connect() {
     return (
         <>
-            <MatchMaker/>
+            <main className="flex flex-col justify-center items-center">
+                <MatchMaker/>
+            </main>
         </>
     )
 }

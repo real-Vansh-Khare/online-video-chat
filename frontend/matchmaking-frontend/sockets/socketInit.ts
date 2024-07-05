@@ -47,7 +47,7 @@ const attachSocketEventListeners = (socket: Socket, matchDetails: MatchDetails, 
       setMatchDetails({ ...matchDetails, matchId: match.id, matchFound: true, isCaller: true });
     } else {
       xlog("Call to be recieved from here.");
-      setMatchDetails({ ...matchDetails, matchId: match.id, matchFound: true, isCaller: false });
+      setMatchDetails({ ...matchDetails, matchId: match.id, matchFound: true, isCaller: false, waiting: false });
     }
   });
 
