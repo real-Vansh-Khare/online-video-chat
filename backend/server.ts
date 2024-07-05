@@ -11,7 +11,8 @@ import { init_socket_connection } from './sockets/socket';
 
 // Maybe later change to https
 import { createServer } from 'http';
-import matchList from './lib/match_wait_list';
+import { dev_clearMatchList } from './util/dev_functions';
+import { dev_controller } from './controllers/dev.controller';
 
 dotenv.config()
 
@@ -47,11 +48,17 @@ app.get('/protected', authenticate_jwt, (req: Request, res: Response) => {
 
 init_socket_connection('/websockets/', server)
 
+// DO these tasks when the server is in development mode
+if(process.env.NODE_ENV === 'DEVELOPMENT') {
+  app.post('/dev', dev_controller);  
+}
+
 app.use(( err: Error, req: Request, res: Response, next: NextFunction) => {
   xlog("caught at global catch");
   console.trace(err);
 
 });
+
 
 server.listen(port, () => {
   xlog(`Server is running at http://localhost:${port}`);

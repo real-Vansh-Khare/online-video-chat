@@ -2,6 +2,7 @@ import { Socket } from "socket.io";
 import matchList from "../../lib/match_wait_list";
 import xlog from "../../util/logger";
 import socket_id_map from "../../lib/data_structures/sid_cid_map";
+import SocketEvents from "../../enums/socket_enum";
 
 /**
  * Puts the client ID into the match waiting list. The matchmaking engine
@@ -28,5 +29,5 @@ export const match_request_handler = async (
   await matchList.add_waiter(id);
 
   // Return message.
-  callback("finding match...");
+  callback(SocketEvents.WAIT);
 };
