@@ -88,6 +88,10 @@ class MatchWaitList {
       return null;
     }
   }
+
+  public async dev_clearList () {
+    await this.prisma?.matchWaitList.deleteMany({});
+  }
 };
 
 let matchList: MatchWaitList;
