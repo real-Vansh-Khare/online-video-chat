@@ -89,6 +89,7 @@ const VideoCaller: React.FC<VideoCallerProps> = ({ userId, matchDetails }) => {
             }
         }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchDetails, userId]);
 
   return (
