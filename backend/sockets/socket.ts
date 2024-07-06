@@ -53,5 +53,11 @@ export const init_socket_connection = (path: string, server: Server) => {
       // Delete from the map
       socket_id_map.remove(socket.id);
     });
+
+    socket.on(SocketEvents.RECIEVER_READY, (match) => {
+      console.log("Recieved reciever ready request from ", match.reciever);
+      io.to(match.caller).emit(SocketEvents.RECIEVER_READY);
+      console.log("Emitted reciever ready request to ", match.caller);
+    });
   });
 };
