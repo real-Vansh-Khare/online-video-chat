@@ -10,6 +10,7 @@ enum SocketEvents {
   MATCH_REQUEST = "request-match",
   WAIT = "waiting",
   MATCH_FOUND = "match-found",
+  RECIEVER_READY = "reciever-ready",
 }
 
 export default SocketEvents;

@@ -2,15 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MatchDetails } from './matchmaker';
 import Peer, { MediaConnection } from 'peerjs';
 import xlog from '@/utils/logger';
+import SocketEvents from '@/enums/socket_enum';
+import { Socket } from 'socket.io-client';
 
 interface VideoCallerProps {
   userId: string | null;
   matchDetails: MatchDetails;
+  socket: Socket | undefined;
 }
 
 
 
-const VideoCaller: React.FC<VideoCallerProps> = ({ userId, matchDetails }) => {
+const VideoCaller: React.FC<VideoCallerProps> = ({ userId, matchDetails, socket }) => {
   const userVideo = useRef<HTMLVideoElement>(null);
   const matchVideo = useRef<HTMLVideoElement>(null);
   const [peer, setPeer] = useState<Peer | null>(null);
@@ -18,19 +21,26 @@ const VideoCaller: React.FC<VideoCallerProps> = ({ userId, matchDetails }) => {
   const prevId = useRef<string | null>(null)
 
   function caller(peerI: Peer, stream: MediaStream) {
-    setTimeout(() => {
+    console.log("caller() function called");
+    socket?.on(SocketEvents.RECIEVER_READY, () => {
+        console.log("Reciever ready event reached at the caller")
         if(matchDetails.matchId)
         {
+            console.log("$$$ Call  has been made from caller")
             const call = peerI.call(matchDetails.matchId, stream)
             call.on("stream", (remoteStream: MediaStream) => {
                 matchVideo.current!.srcObject = remoteStream
             })
             prevId.current = matchDetails.matchId
         }
-    }, 1500)
+    });
   }
+
   function reciever(peerI: Peer, stream: MediaStream) {
+    console.log("reciever() function called");
+    socket?.emit(SocketEvents.RECIEVER_READY, { caller: matchDetails.matchId, reciever: userId });
     peerI.on("call", (call: MediaConnection) => {
+        console.log("$$$ Call has arrived")
         call.answer(stream)
         call.on("stream", (remoteStream: MediaStream) => {
             matchVideo.current!.srcObject = remoteStream

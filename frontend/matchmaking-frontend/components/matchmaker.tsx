@@ -40,7 +40,7 @@ const MatchMaker = () => {
   return (
     <>
       <Heading matchFound={matchDetails.matchFound} />
-      {matchDetails.matchFound && <VideoCaller userId={userId} matchDetails={matchDetails}/>}
+      {matchDetails.matchFound && <VideoCaller userId={userId} matchDetails={matchDetails} socket={socketInstance}/>}
       {/* {matchDetails.matchFound && " match found with " + matchDetails.matchId} */}
       <button 
         onClick={() => {
